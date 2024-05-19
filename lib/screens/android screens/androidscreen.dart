@@ -40,7 +40,7 @@ class AndroidScreen extends StatelessWidget {
           children: [
             AddScreen(),
             ChatScreen(),
-            Center(child: Text('Bike Content')),
+            Center(child: Text('No Any Chat Yet...')),
             SettingScreen()
           ],
         ),

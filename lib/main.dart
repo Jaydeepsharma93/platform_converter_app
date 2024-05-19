@@ -19,7 +19,9 @@ void main() {
       ChangeNotifierProvider(
         create: (context) => AddData(),
       ),
-      ChangeNotifierProvider(create: (context) => ThemeChange(),)
+      ChangeNotifierProvider(
+        create: (context) => ThemeChange(),
+      )
     ],
     child: const MyApp(),
   ));
@@ -32,7 +34,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(),
+      themeMode: Provider.of<ThemeChange>(context).isLight
+          ? ThemeMode.dark
+          : ThemeMode.light,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Provider.of<SystemChange>(context).isIos
           ? IosScreen()

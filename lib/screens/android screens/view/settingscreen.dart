@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:platform_converter_app/screens/provider/changetheme.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -20,10 +22,42 @@ class SettingScreen extends StatelessWidget {
               subtitle:
                   Text('Update Profile Data', style: TextStyle(fontSize: 16)),
               trailing: Switch(
-                value: false,
-                onChanged: (value) {},
+                value: Provider.of<ThemeChange>(context).isContainer,
+                onChanged: (value) {
+                  Provider.of<ThemeChange>(context, listen: false)
+                      .container(value);
+                },
               ),
             ),
+            (Provider.of<ThemeChange>(context).isContainer)
+                ? Container(
+                    height: 280,
+                    alignment: Alignment.bottomCenter,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: InkWell(
+                            onTap: () {
+
+                            },
+                            child: CircleAvatar(
+                              maxRadius: 65,
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(onPressed: () {}, child: Text("SAVE")),
+                            TextButton(onPressed: () {}, child: Text("CLEAR"))
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                : Container(),
+            Divider(),
             ListTile(
               leading: Icon(
                 Icons.wb_sunny_outlined,
@@ -33,9 +67,10 @@ class SettingScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
               subtitle: Text("Change Theme", style: TextStyle(fontSize: 16)),
               trailing: Switch(
-                value: false,
+                value: Provider.of<ThemeChange>(context).isLight,
                 onChanged: (value) {
-                  
+                  Provider.of<ThemeChange>(context, listen: false)
+                      .changeTheme(value);
                 },
               ),
             )
