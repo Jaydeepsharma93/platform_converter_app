@@ -39,7 +39,6 @@ class SettingScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: InkWell(
                             onTap: () {
-
                             },
                             child: CircleAvatar(
                               maxRadius: 65,
