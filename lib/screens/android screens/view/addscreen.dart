@@ -12,7 +12,7 @@ class AddScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var imagepath = Provider.of<ImagePickerProvider>(context).imagepath;
+    var imagepath = Provider.of<ImagePickerProvider>(context,listen: true).imagepath;
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -90,7 +90,7 @@ class AddScreen extends StatelessWidget {
                     Text(
                       Provider.of<AddData>(context).dateTime == null
                           ? "Pick Date"
-                          : "${Provider.of<AddData>(context).dateTime!.day.toString() + '-' + Provider.of<AddData>(context).dateTime!.month.toString() + '-' + Provider.of<AddData>(context).dateTime!.year.toString()}",
+                          : "${Provider.of<AddData>(context, listen: true).dateTime!.day.toString() + '-' + Provider.of<AddData>(context, listen: true).dateTime!.month.toString() + '-' + Provider.of<AddData>(context, listen: true).dateTime!.year.toString()}",
                       style: TextStyle(
                         fontSize: 20,
                       ),
@@ -125,6 +125,9 @@ class AddScreen extends StatelessWidget {
                     onPressed: () {
                       Provider.of<AddData>(context, listen: false)
                           .addData(context);
+                      Provider.of<AddData>(context, listen: false)
+                          .resetValue(context: context);
+
                     },
                     child: Text(
                       'SAVE',

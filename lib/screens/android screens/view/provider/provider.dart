@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/addscreen.dart';
-import 'package:platform_converter_app/screens/model/listofperson.dart';
 import 'package:platform_converter_app/screens/provider/imgpickerprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -8,7 +7,7 @@ class AddData extends ChangeNotifier {
   DateTime? dateTime;
   TimeOfDay? timeOfDay;
   Duration? duration;
-
+List listOfPerson=[];
   void pickDate(DateTime? dateTime) {
     this.dateTime = dateTime;
     notifyListeners();
@@ -27,12 +26,40 @@ class AddData extends ChangeNotifier {
   }
 
   void addData(context) {
-    listOfPerson.add({
+    this.listOfPerson.add({
       'Name': txtName.text,
       'Chat': txtChat.text,
-      'Num': int.parse(txtNumder.text),
-      'img': FileImage(Provider.of<ImagePickerProvider>(context).imagepath!)
+      'Num': txtNumder.text,
+      'img': Provider.of<ImagePickerProvider>(context, listen: false).imagepath!,
+      'date' : "${dateTime!.day.toString()+"-"+dateTime!.month.toString()+"-"+dateTime!.year.toString()}",
+      'time' : "${timeOfDay!.hour.toString() + ":" +timeOfDay!.minute.toString()}"
     });
     notifyListeners();
   }
+
+  void resetValue({required BuildContext context})
+  {
+    txtName.clear();
+    txtNumder.clear();
+    txtChat.clear();
+    dateTime=null;
+    timeOfDay=null;
+    Provider.of<ImagePickerProvider>(context, listen: false).imagepath=null;
+    notifyListeners();
+  }
+  Future<void> delete(int index) async {
+    await Future.delayed(Duration(milliseconds: 200));
+    listOfPerson.removeAt(index);
+    notifyListeners();
+  }
+
+  void updateList(int index)
+  {
+    listOfPerson[index]['Name']= txtName.text;
+    listOfPerson[index]['Num']=txtNumder.text;
+    listOfPerson[index]['Chat']=txtChat.text;
+    notifyListeners();
+  }
+
+
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/addscreen.dart';
+import 'package:platform_converter_app/screens/android%20screens/view/callscreen.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/chatscreen.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/settingscreen.dart';
 import 'package:platform_converter_app/screens/provider/Systemchangeprovider.dart';
@@ -40,7 +41,7 @@ class AndroidScreen extends StatelessWidget {
           children: [
             AddScreen(),
             ChatScreen(),
-            Center(child: Text('No Any Chat Yet...')),
+            CallScreen(),
             SettingScreen()
           ],
         ),

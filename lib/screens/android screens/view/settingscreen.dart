@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:platform_converter_app/screens/ios%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/provider/changetheme.dart';
 import 'package:provider/provider.dart';
-
+TextEditingController txtnamea = TextEditingController();
+TextEditingController txtbio = TextEditingController();
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
@@ -33,7 +34,7 @@ class SettingScreen extends StatelessWidget {
             ),
             (Provider.of<ThemeChange>(context).isContainer)
                 ? Container(
-                    height: 280,
+                    height: 300,
                     alignment: Alignment.bottomCenter,
                     child: Column(
                       children: [
@@ -54,13 +55,25 @@ class SettingScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        TextField(
+                          controller: txtnamea,
+                          decoration: InputDecoration(
+                              hintText: "Enter your name..."
+                          ),
+                        ) ,
+                        TextField(
+                          controller: txtbio,
+                          decoration: InputDecoration(
+                              hintText: "Enter your bio..."
+                          ),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             TextButton(onPressed: () {}, child: Text("SAVE")),
                             TextButton(onPressed: () {}, child: Text("CLEAR"))
                           ],
-                        )
+                        ),
                       ],
                     ),
                   )

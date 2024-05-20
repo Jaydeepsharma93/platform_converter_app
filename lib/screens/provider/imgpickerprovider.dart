@@ -12,14 +12,3 @@ class ImagePickerProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-
-class ImagePickerIos extends ChangeNotifier{
-  ImagePicker _picker = ImagePicker();
-  File? imagepath;
-
-  Future<void> pickimg() async {
-    XFile? images = await _picker.pickImage(source: ImageSource.camera);
-    imagepath = File(images!.path);
-    notifyListeners();
-  }
-}

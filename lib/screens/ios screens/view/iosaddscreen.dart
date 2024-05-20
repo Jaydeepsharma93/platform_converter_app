@@ -1,18 +1,15 @@
 import 'package:flutter/cupertino.dart';
+import 'package:platform_converter_app/screens/android%20screens/view/addscreen.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/provider/imgpickerprovider.dart';
 import 'package:provider/provider.dart';
-
-TextEditingController txtName1 = TextEditingController();
-TextEditingController txtNumder1 = TextEditingController();
-TextEditingController txtChat1 = TextEditingController();
 
 class IosAddDetail extends StatelessWidget {
   const IosAddDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var imagepath = Provider.of<ImagePickerIos>(context).imagepath;
+    var imagepath = Provider.of<ImagePickerProvider>(context).imagepath;
     return CupertinoPageScaffold(
         child: SafeArea(
       child: SizedBox(
@@ -43,7 +40,7 @@ class IosAddDetail extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Provider.of<ImagePickerIos>(context, listen: false).pickimg();
+                    Provider.of<ImagePickerProvider>(context, listen: false).pickimg();
                   },
                 ),
                 Row(
@@ -69,7 +66,7 @@ class IosAddDetail extends StatelessWidget {
                               return null;
                             }
                           },
-                          controller: txtName1,
+                          controller: txtName,
                         ),
                       ),
                     )
@@ -98,7 +95,7 @@ class IosAddDetail extends StatelessWidget {
                               return null;
                             }
                           },
-                          controller: txtNumder1,
+                          controller: txtNumder,
                         ),
                       ),
                     )
@@ -127,7 +124,7 @@ class IosAddDetail extends StatelessWidget {
                               return null;
                             }
                           },
-                          controller: txtChat1,
+                          controller: txtChat,
                         ),
                       ),
                     )
@@ -195,7 +192,13 @@ class IosAddDetail extends StatelessWidget {
                       ),
                     )
                   ],
-                )
+                ),
+                CupertinoButton(child: Text('SAVE',style: TextStyle(fontSize: 20,height: 5),), onPressed: () {
+                  Provider.of<AddData>(context, listen: false)
+                      .addData(context);
+                  Provider.of<AddData>(context, listen: false)
+                      .resetValue(context: context);
+                },)
               ],
             ),
           ),

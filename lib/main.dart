@@ -24,9 +24,8 @@ void main() {
         create: (context) => ThemeChange(),
       ),
       ChangeNotifierProvider(
-        create: (context) => ImagePickerIos(),
-      ),
-      ChangeNotifierProvider(create: (context) => ImgProvider(),)
+        create: (context) => ImgProvider(),
+      )
     ],
     child: const MyApp(),
   ));

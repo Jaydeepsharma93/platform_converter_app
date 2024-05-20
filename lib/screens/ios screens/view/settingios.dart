@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:platform_converter_app/screens/android%20screens/view/addscreen.dart';
+import 'package:platform_converter_app/screens/android%20screens/view/settingscreen.dart';
 import 'package:platform_converter_app/screens/ios%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/provider/changetheme.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +43,7 @@ class SettingScreenIos extends StatelessWidget {
             ),
             (Provider.of<ThemeChange>(context).isContainer)
                 ? Container(
-                    height: 280,
+                    height: 320,
                     child: Column(
                       children: [
                         CupertinoButton(
@@ -66,6 +68,17 @@ class SettingScreenIos extends StatelessWidget {
                             Provider.of<ImgProvider>(context, listen: false)
                                 .pickimg();
                           },
+                        ),
+                        CupertinoTextField(
+                          controller: txtnamea,
+                          placeholder: 'Enter Your Name...',
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: CupertinoTextField(
+                            controller: txtbio,
+                            placeholder: 'Enter Your Bio...',
+                          ),
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

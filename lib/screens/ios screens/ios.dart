@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:platform_converter_app/screens/ios%20screens/view/iosaddscreen.dart';
+import 'package:platform_converter_app/screens/ios%20screens/view/ioscall.dart';
+import 'package:platform_converter_app/screens/ios%20screens/view/ioschat.dart';
 import 'package:platform_converter_app/screens/ios%20screens/view/settingios.dart';
 import 'package:platform_converter_app/screens/provider/Systemchangeprovider.dart';
 import 'package:platform_converter_app/screens/provider/changetheme.dart';
@@ -45,7 +47,7 @@ class IosScreen extends StatelessWidget {
 
 List list = [
   IosAddDetail(),
-  Container(),
-  Container(),
+  IosChatScreeen(),
+  IosCAllScreen(),
   SettingScreenIos()
 ];
