@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:platform_converter_app/screens/ios%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/provider/changetheme.dart';
 import 'package:provider/provider.dart';
 
@@ -7,6 +8,7 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var imagepath = Provider.of<ImgProvider>(context).imagepath;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -39,8 +41,15 @@ class SettingScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           child: InkWell(
                             onTap: () {
+                              Provider.of<ImgProvider>(context, listen: false)
+                                  .pickimg();
                             },
                             child: CircleAvatar(
+                              child: imagepath == null
+                                  ? Icon(Icons.add_a_photo_outlined)
+                                  : null,
+                              backgroundImage:
+                              imagepath == null ? null : FileImage(imagepath),
                               maxRadius: 65,
                             ),
                           ),

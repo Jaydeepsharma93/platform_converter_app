@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:platform_converter_app/screens/android%20screens/androidscreen.dart';
 import 'package:platform_converter_app/screens/android%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/ios%20screens/ios.dart';
+import 'package:platform_converter_app/screens/ios%20screens/view/provider/provider.dart';
 import 'package:platform_converter_app/screens/provider/Systemchangeprovider.dart';
 import 'package:platform_converter_app/screens/provider/changetheme.dart';
 import 'package:platform_converter_app/screens/provider/imgpickerprovider.dart';
@@ -21,7 +22,11 @@ void main() {
       ),
       ChangeNotifierProvider(
         create: (context) => ThemeChange(),
-      )
+      ),
+      ChangeNotifierProvider(
+        create: (context) => ImagePickerIos(),
+      ),
+      ChangeNotifierProvider(create: (context) => ImgProvider(),)
     ],
     child: const MyApp(),
   ));

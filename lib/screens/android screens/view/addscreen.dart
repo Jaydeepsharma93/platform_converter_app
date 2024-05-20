@@ -6,11 +6,13 @@ import 'package:provider/provider.dart';
 TextEditingController txtName = TextEditingController();
 TextEditingController txtNumder = TextEditingController();
 TextEditingController txtChat = TextEditingController();
+
 class AddScreen extends StatelessWidget {
   const AddScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var imagepath = Provider.of<ImagePickerProvider>(context).imagepath;
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -22,12 +24,17 @@ class AddScreen extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () {
-                      Provider.of<ImagePickerProvider>(context,listen: false).pickimg();
+                      Provider.of<ImagePickerProvider>(context, listen: false)
+                          .pickimg();
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: CircleAvatar(
-                        backgroundImage: Provider.of<ImagePickerProvider>(context).imagepath  != null?FileImage(Provider.of<ImagePickerProvider>(context).imagepath!) : null,
+                        child: imagepath == null
+                            ? Icon(Icons.add_a_photo_outlined)
+                            : null,
+                        backgroundImage:
+                            imagepath == null ? null : FileImage(imagepath),
                         maxRadius: 70,
                       ),
                     )),
@@ -38,7 +45,7 @@ class AddScreen extends StatelessWidget {
                     textInputAction: TextInputAction.next,
                     controller: txtName,
                     decoration: InputDecoration(
-                      labelText: 'Full Name',
+                        labelText: 'Full Name',
                         prefixIcon: Icon(Icons.person_outline),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5))),
@@ -48,7 +55,7 @@ class AddScreen extends StatelessWidget {
                   textInputAction: TextInputAction.next,
                   controller: txtNumder,
                   decoration: InputDecoration(
-                    labelText: 'Phone Number',
+                      labelText: 'Phone Number',
                       prefixIcon: Icon(Icons.phone),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5))),
@@ -67,31 +74,62 @@ class AddScreen extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    IconButton(onPressed: () {
-            
-                    }, icon: Icon(Icons.date_range,size: 30,)),
-                    Text("Pick Date",style: TextStyle(
-                      fontSize: 20,
-            
-                    ),)
+                    IconButton(
+                        onPressed: () async {
+                          Provider.of<AddData>(context,listen: false).pickDate(
+                              await showDatePicker(
+                                      context: context,
+                                      firstDate: DateTime(1970),
+                                      lastDate: DateTime(2024)) ??
+                                  DateTime.now());
+                        },
+                        icon: Icon(
+                          Icons.date_range,
+                          size: 30,
+                        )),
+                    Text(
+                      Provider.of<AddData>(context).dateTime == null
+                          ? "Pick Date"
+                          : "${Provider.of<AddData>(context).dateTime!.day.toString() + '-' + Provider.of<AddData>(context).dateTime!.month.toString() + '-' + Provider.of<AddData>(context).dateTime!.year.toString()}",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )
                   ],
                 ),
                 Row(
                   children: [
-                    IconButton(onPressed: () {
-            
-                    }, icon: Icon(Icons.watch_later_outlined,size: 30,)),
-                    Text("Pick Time",style: TextStyle(
-                      fontSize: 20,
-            
-                    ),)
+                    IconButton(
+                        onPressed: () async {
+                          Provider.of<AddData>(context, listen: false).pickTime(
+                              timeOfDay: await showTimePicker(
+                                      context: context,
+                                      initialTime: TimeOfDay.now()) ??
+                                  TimeOfDay.now());
+                        },
+                        icon: Icon(
+                          Icons.watch_later_outlined,
+                          size: 30,
+                        )),
+                    Text(
+                      Provider.of<AddData>(context).timeOfDay == null
+                          ? "Pick Time"
+                          : "${Provider.of<AddData>(context).timeOfDay!.hour.toString() + ":" + Provider.of<AddData>(context).timeOfDay!.minute.toString()}",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )
                   ],
                 ),
-                OutlinedButton(onPressed: () {
-                  Provider.of<AddData>(context,listen: false).addData(context);
-                }, child: Text('SAVE',style: TextStyle(
-                  fontSize: 20
-                ),)),
+                OutlinedButton(
+                    onPressed: () {
+                      Provider.of<AddData>(context, listen: false)
+                          .addData(context);
+                    },
+                    child: Text(
+                      'SAVE',
+                      style: TextStyle(fontSize: 20),
+                    )),
               ],
             ),
           ),
